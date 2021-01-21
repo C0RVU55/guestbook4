@@ -22,5 +22,16 @@ xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.sprin
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Service" />
             <context:include-filter type="annotation" expression="org.springframework.stereotype.Component" />
     </context:component-scan>
+    
+    	<!-- oracle datasource (dao, driver와 DB간의 세팅이라 applicationContext에서 다운받음)--> 
+	<bean id="oracleDatasource"
+		class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
+		<property name="URL"
+			value="jdbc:oracle:thin:@localhost:1521:xe" /> 
+		<property name="user" value="webdb" /> <!-- DB 아이디 비번 주의 -->
+		<property name="password" value="webdb" />
+		<property name="connectionCachingEnabled" value="true" />
+		<qualifier value="main-db" />
+	</bean>
 
 </beans>
